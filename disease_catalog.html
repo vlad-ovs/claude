@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог болезней - Психосоматические причины</title>
+    <title>Каталог болезней и их психосоматических причин</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -21,9 +21,9 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
@@ -45,122 +45,102 @@
             opacity: 0.9;
         }
 
-        .content {
+        .alphabet-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             padding: 30px;
-        }
-
-        .alphabet {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
+            background: #f8f9fa;
+            justify-content: center;
         }
 
         .letter-btn {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            background: #dc3545;
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 1.2em;
+            padding: 12px 18px;
+            border-radius: 50%;
+            font-size: 18px;
             font-weight: bold;
+            cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+            min-width: 50px;
+            height: 50px;
         }
 
         .letter-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(220, 53, 69, 0.4);
         }
 
         .letter-btn.active {
-            background: linear-gradient(135deg, #4ecdc4, #44a08d);
-            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+            background: #28a745;
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4);
         }
 
-        .diseases-section {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(248, 249, 250, 0.8);
-            border-radius: 15px;
+        .content-area {
+            padding: 30px;
+        }
+
+        .diseases-list {
             display: none;
+            margin-top: 20px;
         }
 
-        .diseases-section.active {
+        .diseases-list.active {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.5s ease-in;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .diseases-grid {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 20px;
+        .disease-item {
+            margin-bottom: 15px;
         }
 
         .disease-btn {
-            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            background: #007bff;
             color: white;
             border: none;
-            padding: 15px 20px;
-            border-radius: 12px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
-            font-size: 1.1em;
-            text-align: left;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(116, 185, 255, 0.3);
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 3px 6px rgba(0, 123, 255, 0.3);
         }
 
         .disease-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4);
+            background: #0056b3;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 123, 255, 0.4);
         }
 
-        .disease-content {
+        .disease-description {
             display: none;
             margin-top: 15px;
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid #74b9ff;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .disease-content.active {
+        .disease-description.active {
             display: block;
-            animation: slideDown 0.4s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .author-louisa {
-            color: #e91e63;
-            font-weight: bold;
-        }
-
-        .author-zhikarentsev {
-            color: #4caf50;
-            font-weight: bold;
+            animation: slideDown 0.4s ease-out;
         }
 
         .author-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border-left: 5px solid;
         }
 
-        .author-block.louisa {
+        .author-block.luiza {
             border-left-color: #e91e63;
         }
 
@@ -169,96 +149,93 @@
         }
 
         .author-name {
-            font-size: 1.2em;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+
+        .author-name.luiza {
+            color: #e91e63;
+        }
+
+        .author-name.zhikarentsev {
+            color: #4caf50;
         }
 
         .cause {
-            background: rgba(255, 0, 0, 0.05);
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border-left: 3px solid #ff6b6b;
+            margin-bottom: 10px;
+            color: #666;
+            line-height: 1.6;
         }
 
         .affirmation {
-            background: rgba(0, 255, 0, 0.05);
-            padding: 12px;
-            margin: 10px 0;
+            color: #2c5282;
+            font-style: italic;
+            font-weight: 600;
+            line-height: 1.7;
+            background: linear-gradient(45deg, #f0f8ff, #e6f3ff);
+            padding: 12px 15px;
             border-radius: 8px;
-            border-left: 3px solid #4caf50;
+            border-left: 4px solid #4a90e2;
+            margin-top: 10px;
+            box-shadow: 0 2px 4px rgba(74, 144, 226, 0.1);
+            text-shadow: 0 1px 2px rgba(44, 82, 130, 0.1);
         }
 
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #6c757d;
             color: white;
             border: none;
-            width: 60px;
-            height: 60px;
+            padding: 12px 16px;
             border-radius: 50%;
+            font-size: 20px;
             cursor: pointer;
-            font-size: 1.5em;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            display: none;
         }
 
         .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            background: #5a6268;
+            transform: translateY(-2px);
         }
 
-        .section-title {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: bold;
+        .back-to-top.visible {
+            display: block;
         }
 
-        .legend {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 15px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-        }
-
-        .louisa-color { background-color: #e91e63; }
-        .zhikarentsev-color { background-color: #4caf50; }
 
         @media (max-width: 768px) {
-            .alphabet {
-                grid-template-columns: repeat(6, 1fr);
+            .alphabet-nav {
+                padding: 15px;
+            }
+            
+            .letter-btn {
+                padding: 8px 12px;
+                font-size: 16px;
+                min-width: 40px;
+                height: 40px;
+            }
+            
+            .content-area {
+                padding: 15px;
             }
             
             .header h1 {
                 font-size: 2em;
-            }
-            
-            .content {
-                padding: 20px;
             }
         }
     </style>
@@ -266,33 +243,22 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Психосоматический каталог болезней</h1>
-            <p>Вероятные причины болезней и новые образцы мыслей для исцеления</p>
+            <h1>Каталог болезней</h1>
+            <p>Психосоматические причины и новые образцы мыслей для исцеления</p>
         </div>
 
-        <div class="content">
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-color louisa-color"></div>
-                    <span><strong>Луиза Хей</strong> - причины и аффирмации</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color zhikarentsev-color"></div>
-                    <span><strong>В. Жикаренцев</strong> - причины и аффирмации</span>
-                </div>
-            </div>
+        <div class="alphabet-nav" id="alphabetNav">
+            <!-- Буквы будут добавлены динамически -->
+        </div>
 
-            <div class="alphabet" id="alphabet">
-                <!-- Буквы будут добавлены через JavaScript -->
-            </div>
-
-            <div class="diseases-sections" id="diseaseSections">
-                <!-- Секции болезней будут добавлены через JavaScript -->
+        <div class="content-area">
+            <div id="diseasesContent">
+                <!-- Контент болезней будет добавлен динамически -->
             </div>
         </div>
     </div>
 
-    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
 
     <script>
         // Данные о болезнях
@@ -300,9 +266,10 @@
             'А': [
                 {
                     name: 'Абсцесс',
-                    entries: [
+                    authors: [
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Человека волнуют мысли о зле, которое ему причинили, о невнимании и об отмщении.',
                             affirmation: 'Я отпускаю свои мысли, даю им уйти. Прошлое ушло. Я чувствую в душе мир.'
                         }
@@ -310,14 +277,16 @@
                 },
                 {
                     name: 'Аддисона болезнь',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Серьезная эмоциональная недостаточность. Злость на себя.',
                             affirmation: 'Я с любовью забочусь о своем теле, мыслях и эмоциях.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Сильная нехватка эмоциональной подпитки. Гнев на себя.',
                             affirmation: 'Я с любовью забочусь о своем теле, уме и своих эмоциях.'
                         }
@@ -325,14 +294,16 @@
                 },
                 {
                     name: 'Аденоиды',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Неурядицы в семье. Ощущение ребенка, что он никому не нужен.',
                             affirmation: 'Это желанный, любимый ребенок.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Семейные трения, споры. До некоторой степени - присутствие детского чувства нежеланности.',
                             affirmation: 'Этот ребенок желанный, и его появление на свет было встречено с радостью, он глубоко любим.'
                         }
@@ -340,24 +311,44 @@
                 },
                 {
                     name: 'Адреналиновые болезни',
-                    entries: [
+                    authors: [
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Пораженчество. Претит забота о себе. Беспокойство, тревога.',
                             affirmation: 'Я люблю себя и одобряю свои поступки и мысли. Забота о самом себе безопасна для меня и принесет мне только пользу.'
                         }
                     ]
                 },
                 {
-                    name: 'Алкоголизм',
-                    entries: [
+                    name: 'Альцгеймера болезнь',
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
+                            cause: 'Желание покинуть эту планету. Неспособность посмотреть в лицо жизни такой, какая она есть. Отказ взаимодействовать с миром таким, какой он есть. Безнадежность и беспомощность. Гнев.',
+                            affirmation: 'Все, что в этой жизни происходит, правильно и имеет свой смысл в пространстве и времени. Божественный план претворяется в жизнь.'
+                        },
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Нежелание воспринимать мир таким, какой он есть. Безнадежность и беспомощность. Гнев.',
+                            affirmation: 'Всегда найдется новая возможность полнее ощутить жизнь. Я прощаюсь со своим прошлым. Я начинаю жить радостно.'
+                        }
+                    ]
+                },
+                {
+                    name: 'Алкоголизм',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Все бессмысленно. Ощущение бренности существования, чувство вины, неадекватности и самоотрицания.',
                             affirmation: 'Я живу настоящим. Я делаю правильный выбор. Я люблю и ценю себя.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Какая польза от всего этого? Чувство бесполезности, пустоты, вины, несоответствия окружающему миру. Отрицание себя.',
                             affirmation: 'Я живу здесь и сейчас. Каждый момент в моей жизни несет в себе новое. Я выбираю для себя способность увидеть свою ценность для окружающего мира. Я люблю себя и одобряю свои действия и мысли.'
                         }
@@ -365,44 +356,33 @@
                 },
                 {
                     name: 'Аллергия',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'На кого у вас аллергия? Отрицание собственной силы.',
                             affirmation: 'Мир безопасен и дружелюбен. Мне спокойно и надежно, я в ладу с жизнью.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Кого вы не переносите? Отрицание своей собственной силы.',
                             affirmation: 'Мир - безопасное место, он дружественно настроен ко мне. Я в безопасности. Я поддерживаю мир с жизнью и окружающими меня людьми.'
                         }
                     ]
                 },
                 {
-                    name: 'Альцгеймера болезнь (слабоумие)',
-                    entries: [
-                        {
-                            author: 'louisa',
-                            cause: 'Нежелание воспринимать мир таким, какой он есть. Безнадежность и беспомощность. Гнев.',
-                            affirmation: 'Всегда найдется новая возможность полнее ощутить жизнь. Я прощаюсь со своим прошлым. Я начинаю жить радостно.'
-                        },
-                        {
-                            author: 'zhikarentsev',
-                            cause: 'Желание покинуть эту планету. Неспособность посмотреть жизни в лицо. Безнадежность и беспомощность.',
-                            affirmation: 'Все, что в этой жизни происходит, правильно и имеет свой смысл в пространстве и времени. Божественный план претворяется в жизнь.'
-                        }
-                    ]
-                },
-                {
                     name: 'Аменорея',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Нежелание быть женщиной. Ненависть к себе.',
                             affirmation: 'Мне нравится быть тем, кем я являюсь. Я - прекрасное выражение плавно текущей жизни.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Нежелание быть женщиной. Нелюбовь к себе.',
                             affirmation: 'Я люблю и принимаю всю себя как женщину. Быть женщиной приятно.'
                         }
@@ -410,14 +390,16 @@
                 },
                 {
                     name: 'Амнезия',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Страх. Бегство от жизни. Неумение постоять за себя.',
                             affirmation: 'Ум, смелость, умение правильно оценить себя - мои неотъемлемые качества. Я смело иду по жизни.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Страх. Бегство от жизни. Неспособность постоять за себя.',
                             affirmation: 'Во мне всегда присутствуют ум, храбрость и высокая оценка себя. Жить безопасно.'
                         }
@@ -425,14 +407,16 @@
                 },
                 {
                     name: 'Анемия',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Неуверенность в себе. Безрадостная жизнь. Боязнь жизни. Считаете себя недостаточно хорошей (хорошим).',
                             affirmation: 'Я смело получаю радость от жизни. Я люблю жизнь.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Позиция по отношению к окружающему миру: "да, но". Отсутствие радости в жизни. Страх перед жизнью. Чувство, что вы недостаточно хороши для окружающего мира.',
                             affirmation: 'Жить и испытывать радость от жизни и от того, чем я занимаюсь, - безопасно. Я люблю жизнь.'
                         }
@@ -440,29 +424,44 @@
                 },
                 {
                     name: 'Анорексия',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Отрицание жизни. Преувеличенные страхи, ненависть к себе и отрицание себя как личности.',
                             affirmation: 'Я могу быть собой. Я прекрасна такая, какая есть. Мой выбор - жизнь. Мой выбор - радость и принятие себя.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Отрицание самой жизни. Присутствие крайнего страха, ненависть к себе и отрицание себя.',
                             affirmation: 'Быть самим (самой) собой безопасно. Со мной все прекрасно. Я выбираю жизнь. Я выбираю радость и принимаю себя таким (такой), какой (какая) я есть.'
                         }
                     ]
                 },
                 {
-                    name: 'Анус: боли',
-                    entries: [
+                    name: 'Аноректальное кровотечение',
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Гнев и раздражительность.',
+                            affirmation: 'Я доверяю жизни. В моей жизни есть место только для благих, правильных действий.'
+                        }
+                    ]
+                },
+                {
+                    name: 'Анус: боли',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Чувство вины. Желание наказания.',
                             affirmation: 'Прошлое кануло в лету. Мой выбор - любить и с одобрением относиться к себе в настоящем.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Чувство вины. Жажда наказания.',
                             affirmation: 'Прошлое ушло. Сейчас я выбираю для себя любить и одобрять свои поступки и мысли.'
                         }
@@ -470,29 +469,67 @@
                 },
                 {
                     name: 'Анус: гнойник',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Злость на то, от чего хотите избавиться.',
                             affirmation: 'Я расслаблена (расслаблен), когда что-то убывает. Уходит то, что лишнее для меня.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Точка освобождения от лишнего груза. Сбрасывание на землю. Гнев по отношению к тому, от чего вы не хотите освободиться.',
                             affirmation: 'Я легко и спокойно освобождаюсь от лишнего в своей жизни. Освободиться, выбросить из головы безопасно для меня. Только лишнее и вредное покидает мое тело.'
                         }
                     ]
                 },
                 {
-                    name: 'Апатия',
-                    entries: [
+                    name: 'Анус: зуд',
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Чувство вины за прошлое.',
+                            affirmation: 'Я прощаю себя. Я свободна (свободен).'
+                        },
+                        {
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
+                            cause: 'Чувство вины перед прошлым. Угрызения совести, раскаяние.',
+                            affirmation: 'Я с любовью прощаю себя. Я свободен (свободна).'
+                        }
+                    ]
+                },
+                {
+                    name: 'Анус: свищ',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Неполное очищение от мусора прошлого.',
+                            affirmation: 'Я охотно освобождаюсь от прошлого. Я свободна (свободен). Я сама любовь.'
+                        },
+                        {
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
+                            cause: 'Неполное освобождение от мусора, ненужного хлама. Продолжаете упорно цепляться за хлам прошлого.',
+                            affirmation: 'Я с любовью и полностью освобождаюсь от своего прошлого. Я свободен (свободна). Я есть любовь.'
+                        }
+                    ]
+                },
+                {
+                    name: 'Апатия',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Сопротивление чувствам, подавление эмоций. Страх.',
                             affirmation: 'Я чувствую себя в безопасности. Я открыта (открыт) для жизни. Я хочу чувствовать жизнь.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Сопротивление чувствам. Заглушение своего "я". Страх.',
                             affirmation: 'Для меня жить и чувствовать безопасно. Я открываю себя жизни. Я хочу жить. Жить в этом мире безопасно. Я люблю и принимаю всего (всю) себя, свою семью и жизнь.'
                         }
@@ -500,29 +537,55 @@
                 },
                 {
                     name: 'Аппендицит',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Страх. Боязнь жизни. Нежелание воспринимать добро.',
                             affirmation: 'Я чувствую себя в безопасности. Я расслаблена (расслаблен) и радостно плыву по волнам жизни.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Страх. Страх перед жизнью. Остановка потока добра.',
                             affirmation: 'Я в безопасности. Я расслабляюсь и с радостью позволяю жизни течь вокруг меня и сквозь меня.'
                         }
                     ]
                 },
                 {
-                    name: 'Артерии',
-                    entries: [
+                    name: 'Аппетит: потеря',
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
+                            cause: 'Страх. Защита себя. Недоверие к жизни.',
+                            affirmation: 'Я люблю и одобряю себя. Я в безопасности. Жизнь безопасна и приносит мне только радость.'
+                        }
+                    ]
+                },
+                {
+                    name: 'Аппетит: чрезмерный',
+                    authors: [
+                        {
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
+                            cause: 'Страх. Потребность в защите. Осуждение своих эмоций.',
+                            affirmation: 'Я в безопасности. Чувствовать и переживать эмоции безопасно. Мои чувства - нормальное явление, и окружающие люди принимают мои чувства такими, какие они есть.'
+                        }
+                    ]
+                },
+                {
+                    name: 'Артерии',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Неумение радоваться жизни.',
                             affirmation: 'Я полна (полон) радости. Она растекается по мне.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Несут радость жизни.',
                             affirmation: 'Радость к жизни переполняет меня. Она протекает сквозь меня с каждым ударом моего сердца.'
                         }
@@ -530,14 +593,16 @@
                 },
                 {
                     name: 'Артрит (подагра)',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Понимание, что никогда не любила (любил). Критицизм, презрение.',
                             affirmation: 'Я сама любовь. Я теперь решила (решил) любить себя и относиться к себе с любовью. Я смотрю на окружающих с любовью.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Чувство, что нелюбим. Критицизм, чувство обиды, негодования. Гнев.',
                             affirmation: 'Я есть сама любовь. Сейчас я выбираю любовь к себе и одобрение своих поступков и мыслей. Я смотрю на людей, испытывая к ним любовь.'
                         }
@@ -545,14 +610,16 @@
                 },
                 {
                     name: 'Артрит пальцев рук',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Желание наказать себя. Осуждение. Ощущение себя жертвой.',
                             affirmation: 'Я смотрю на мир с любовью и пониманием. Все, что происходит в жизни, я воспринимаю через призму любви.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Желание наказывать. Обвинение, порицание, вина. Чувство, что вас обманули, что вы сделались жертвой обмана.',
                             affirmation: 'Я смотрю вокруг с любовью и пониманием. Весь мой опыт, все мои переживания я выставляю на свет любви.'
                         }
@@ -560,14 +627,16 @@
                 },
                 {
                     name: 'Астигматизм',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Я - источник неприятностей. Боязнь увидеть себя в истинном свете.',
                             affirmation: 'Отныне я хочу видеть свою красоту и великолепие.'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Я беспокоюсь, волнуюсь, тревожусь. Страх реально увидеть себя.',
                             affirmation: 'Я смотрю на жизнь с любовью и радостью. Мне нравится смотреть вокруг и на себя.'
                         }
@@ -575,14 +644,16 @@
                 },
                 {
                     name: 'Астма',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
+                            name: 'Луиза Хей',
+                            type: 'luiza',
                             cause: 'Задавленная любовь. Неспособность жить для себя. Подавление чувств.',
                             affirmation: 'Я являюсь хозяином жизни. Я решила (решил) быть свободной (свободным).'
                         },
                         {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Ухудшающая, подавляющая любовь. Неспособность дышать ради самого (самой) себя. Подавление, душение чувств. Подавленное желание плакать.',
                             affirmation: 'Для меня безопасно взять на себя ответственность за свою собственную жизнь. Я выбираю быть свободным (свободной).'
                         }
@@ -590,139 +661,209 @@
                 },
                 {
                     name: 'Атеросклероз',
-                    entries: [
+                    authors: [
                         {
-                            author: 'louisa',
-                            cause: 'Внутреннее сопротивление, напряжение. Прогрессирующая узость мышления. Нежелание видеть добро.',
-                            affirmation: 'Я открыта (открыт) для жизни и радости. Мой выбор - взгляд на мир с любовью.'
-                        },
-                        {
-                            author: 'zhikarentsev',
+                            name: 'В. Жикаренцев',
+                            type: 'zhikarentsev',
                             cause: 'Сопротивление, напряжение, усиленная узколобость. Отказ увидеть добро в окружающем мире.',
                             affirmation: 'Я полностью открыт (открыта) жизни и радости в этой жизни. Я выбираю для себя путь, на котором я воспринимаю окружающий меня мир с любовью.'
+                        },
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Внутреннее сопротивление, напряжение. Прогрессирующая узость мышления. Нежелание видеть добро.',
+                            affirmation: 'Я открыта (открыт) для жизни и радости. Мой выбор - взгляд на мир с любовью.'
                         }
                     ]
                 }
             ],
-            'Б': [], 'В': [], 'Г': [], 'Д': [], 'Е': [], 'Ж': [], 'З': [], 'И': [], 
-            'К': [], 'Л': [], 'М': [], 'Н': [], 'О': [], 'П': [], 'Р': [], 'С': [], 
-            'Т': [], 'У': [], 'Ф': [], 'Х': [], 'Ц': [], 'Ч': [], 'Ш': [], 'Щ': [], 
-            'Э': [], 'Ю': [], 'Я': []
+            'Б': [
+                {
+                    name: 'Базедова болезнь',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Гнев оттого, что вас игнорируют.',
+                            affirmation: 'Я - центр жизни. Я одобряю себя и все, что я делаю.'
+                        }
+                    ]
+                },
+                {
+                    name: 'Бессонница',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Страх. Недоверие к жизненному процессу. Чувство вины.',
+                            affirmation: 'С любовью отпускаю этот день и погружаюсь в мирный сон, зная, что завтра позаботится о себе сам.'
+                        }
+                    ]
+                }
+            ],
+            'В': [
+                {
+                    name: 'Варикозное расширение вен',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Пребывание в ситуации, которую ненавидите. Неодобрение. Чувство перегруженности и задавленности работой.',
+                            affirmation: 'Я живу в радости и двигаюсь с легкостью. Я люблю жизнь и циркулирую свободно.'
+                        }
+                    ]
+                }
+            ],
+            'Г': [
+                {
+                    name: 'Гастрит',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Длительная неопределенность. Чувство обреченности.',
+                            affirmation: 'Я люблю и одобряю себя. Я в безопасности.'
+                        }
+                    ]
+                }
+            ],
+            'Д': [
+                {
+                    name: 'Депрессия',
+                    authors: [
+                        {
+                            name: 'Луиза Хей',
+                            type: 'luiza',
+                            cause: 'Гнев, который, как вы чувствуете, у вас нет права иметь. Безнадежность.',
+                            affirmation: 'Я теперь поднимаюсь над ожиданиями других. Я создаю свою жизнь.'
+                        }
+                    ]
+                }
+            ]
         };
 
         // Инициализация страницы
-        function init() {
-            createAlphabet();
-            createDiseaseSections();
+        function initializePage() {
+            createAlphabetNavigation();
+            showScrollToTopButton();
         }
 
-        // Создание алфавита
-        function createAlphabet() {
-            const alphabet = document.getElementById('alphabet');
-            const letters = Object.keys(diseases);
+        // Создание навигации по алфавиту
+        function createAlphabetNavigation() {
+            const alphabetNav = document.getElementById('alphabetNav');
+            const availableLetters = Object.keys(diseases);
             
-            letters.forEach(letter => {
+            availableLetters.forEach(letter => {
                 const btn = document.createElement('button');
                 btn.className = 'letter-btn';
                 btn.textContent = letter;
-                btn.onclick = () => showLetter(letter, btn);
-                alphabet.appendChild(btn);
+                btn.onclick = () => showDiseasesForLetter(letter);
+                alphabetNav.appendChild(btn);
             });
         }
 
-        // Создание секций болезней
-        function createDiseaseSections() {
-            const container = document.getElementById('diseaseSections');
-            
-            Object.keys(diseases).forEach(letter => {
-                const section = document.createElement('div');
-                section.className = 'diseases-section';
-                section.id = `section-${letter}`;
-                
-                if (diseases[letter].length > 0) {
-                    section.innerHTML = `
-                        <h2 class="section-title">Болезни на букву "${letter}"</h2>
-                        <div class="diseases-grid">
-                            ${diseases[letter].map((disease, index) => `
-                                <button class="disease-btn" onclick="toggleDisease('${letter}', ${index})">${disease.name}</button>
-                                <div class="disease-content" id="disease-${letter}-${index}">
-                                    <h3>${disease.name}</h3>
-                                    ${disease.entries.map(entry => `
-                                        <div class="author-block ${entry.author}">
-                                            <div class="author-name author-${entry.author}">
-                                                ${entry.author === 'louisa' ? 'Луиза Хей' : 'В. Жикаренцев'}
-                                            </div>
-                                            <div class="cause">
-                                                <strong>Причина:</strong> ${entry.cause}
-                                            </div>
-                                            <div class="affirmation">
-                                                <strong>Новый образец мыслей:</strong> ${entry.affirmation}
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            `).join('')}
-                        </div>
-                    `;
-                } else {
-                    section.innerHTML = `
-                        <h2 class="section-title">Болезни на букву "${letter}"</h2>
-                        <p style="text-align: center; color: #666; font-style: italic;">
-                            Болезни на эту букву будут добавлены позже
-                        </p>
-                    `;
+        // Показать болезни для выбранной буквы
+        function showDiseasesForLetter(letter) {
+            // Обновить активное состояние кнопок
+            document.querySelectorAll('.letter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === letter) {
+                    btn.classList.add('active');
                 }
-                
-                container.appendChild(section);
             });
-        }
 
-        // Показать болезни на выбранную букву
-        function showLetter(letter, btn) {
-            // Убираем активный класс у всех кнопок
-            document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
-            
-            // Добавляем активный класс к выбранной кнопке
-            btn.classList.add('active');
-            
-            // Скрываем все секции
-            document.querySelectorAll('.diseases-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Показываем выбранную секцию
-            const section = document.getElementById(`section-${letter}`);
-            if (section) {
-                section.classList.add('active');
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
+            // Очистить контент
+            const contentArea = document.getElementById('diseasesContent');
+            contentArea.innerHTML = '';
 
-        // Переключить отображение болезни
-        function toggleDisease(letter, index) {
-            const diseaseContent = document.getElementById(`disease-${letter}-${index}`);
-            
-            if (diseaseContent.classList.contains('active')) {
-                diseaseContent.classList.remove('active');
-            } else {
-                // Закрываем все другие открытые болезни в этой секции
-                document.querySelectorAll(`#section-${letter} .disease-content`).forEach(content => {
-                    content.classList.remove('active');
+            // Создать контейнер для списка болезней
+            const diseasesList = document.createElement('div');
+            diseasesList.className = 'diseases-list active';
+            diseasesList.innerHTML = `<h2 style="margin-bottom: 20px; color: #333; font-size: 1.8em;">Болезни на букву "${letter}"</h2>`;
+
+            // Добавить болезни
+            diseases[letter].forEach((disease, index) => {
+                const diseaseItem = document.createElement('div');
+                diseaseItem.className = 'disease-item';
+
+                const diseaseBtn = document.createElement('button');
+                diseaseBtn.className = 'disease-btn';
+                diseaseBtn.textContent = disease.name;
+                diseaseBtn.onclick = () => toggleDiseaseDescription(letter, index);
+
+                const diseaseDescription = document.createElement('div');
+                diseaseDescription.className = 'disease-description';
+                diseaseDescription.id = `disease-${letter}-${index}`;
+
+                // Создать блоки для каждого автора
+                disease.authors.forEach(author => {
+                    const authorBlock = document.createElement('div');
+                    authorBlock.className = `author-block ${author.type}`;
+
+                    const authorName = document.createElement('div');
+                    authorName.className = `author-name ${author.type}`;
+                    authorName.textContent = author.name;
+
+                    const cause = document.createElement('div');
+                    cause.className = 'cause';
+                    cause.innerHTML = `<strong>Причина:</strong> ${author.cause}`;
+
+                    const affirmation = document.createElement('div');
+                    affirmation.className = 'affirmation';
+                    affirmation.innerHTML = `<strong>Новый образец мыслей:</strong> ${author.affirmation}`;
+
+                    authorBlock.appendChild(authorName);
+                    authorBlock.appendChild(cause);
+                    authorBlock.appendChild(affirmation);
+                    diseaseDescription.appendChild(authorBlock);
                 });
-                
-                // Открываем выбранную болезнь
-                diseaseContent.classList.add('active');
-                diseaseContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                diseaseItem.appendChild(diseaseBtn);
+                diseaseItem.appendChild(diseaseDescription);
+                diseasesList.appendChild(diseaseItem);
+            });
+
+            contentArea.appendChild(diseasesList);
+        }
+
+        // Переключить описание болезни
+        function toggleDiseaseDescription(letter, index) {
+            const description = document.getElementById(`disease-${letter}-${index}`);
+            const isActive = description.classList.contains('active');
+            
+            // Закрыть все описания
+            document.querySelectorAll('.disease-description').forEach(desc => {
+                desc.classList.remove('active');
+            });
+
+            // Открыть выбранное описание, если оно не было активным
+            if (!isActive) {
+                description.classList.add('active');
             }
+        }
+
+        // Показать кнопку "Наверх"
+        function showScrollToTopButton() {
+            window.addEventListener('scroll', () => {
+                const backToTopBtn = document.getElementById('backToTop');
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
         }
 
         // Прокрутить наверх
         function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
-        // Запуск при загрузке страницы
-        document.addEventListener('DOMContentLoaded', init);
+        // Запустить инициализацию при загрузке страницы
+        document.addEventListener('DOMContentLoaded', initializePage);
     </script>
 </body>
 </html>
